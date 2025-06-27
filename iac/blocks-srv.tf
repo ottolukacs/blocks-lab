@@ -4,13 +4,14 @@ resource "aws_instance" "blocks-srv" {
   key_name               = "blocks-key"
   vpc_security_group_ids = [aws_security_group.blocks-sg.id]
   availability_zone      = var.zone
-  private_ip = "172.31.16.10"
+  private_ip             = "172.31.16.10"
 
   tags = {
     Name    = "blocks-srv"
     Project = "blocks-lab"
   }
 
+  # Provisioning first things
   provisioner "file" {
     source      = "jumpstart.sh"
     destination = "/tmp/jumpstart.sh"
@@ -19,7 +20,7 @@ resource "aws_instance" "blocks-srv" {
   connection {
     type        = "ssh"
     user        = var.unixuser
-    private_key = file("iac_key")
+    private_key = file("../../keys/iac_key")
     host        = self.public_ip
   }
 
@@ -30,4 +31,8 @@ resource "aws_instance" "blocks-srv" {
     ]
   }
 
+}
+
+output "blocks-public-ip" {
+  value = aws_instance.blocks-srv.public_ip
 }
