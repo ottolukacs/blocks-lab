@@ -1,9 +1,39 @@
 ---
-- name: Deploy Docker Compose stack and bulid Wazuh
+- name: Deploy Docker Compose stack and build Wazuh
   hosts: localhost
   become: yes
 
   tasks:
+    - name: Create swapfile
+      ansible.builtin.command: fallocate -l 4G /swapfile
+      args:
+        creates: /swapfile
+
+    - name: Set permissions on swapfile
+      file:
+        path: /swapfile
+        mode: '0600'
+        owner: root
+        group: root
+
+    - name: Format swapfile
+      command: mkswap /swapfile
+      args:
+        creates: /swapfile
+
+    - name: Enable swapfile
+      command: swapon /swapfile
+      args:
+        creates: /proc/swaps
+
+    - name: Add swapfile to /etc/fstab
+      mount:
+        name: none
+        src: /swapfile
+        fstype: swap
+        opts: sw
+        state: present
+
     - name: Install required system packages
       apt:
         name:

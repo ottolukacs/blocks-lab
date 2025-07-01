@@ -1,6 +1,6 @@
 resource "aws_instance" "blocks-srv" {
   ami                    = var.amiID[var.region]
-  instance_type          = "t2.micro"
+  instance_type          = "t2.medium"
   key_name               = "blocks-key"
   vpc_security_group_ids = [aws_security_group.blocks-sg.id]
   availability_zone      = var.zone
@@ -9,6 +9,11 @@ resource "aws_instance" "blocks-srv" {
   tags = {
     Name    = "blocks-srv"
     Project = "blocks-lab"
+  }
+
+  root_block_device {
+    volume_size = 20
+    volume_type = "gp3"
   }
 
   # Provisioning first things
