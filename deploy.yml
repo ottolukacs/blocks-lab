@@ -42,25 +42,16 @@
         version: v4.12.0
 
     - name: Generate indexer certs
-      community.docker.docker_compose:
-        project_src: "{{ ansible_env.HOME }}/wazuh-docker"
+      community.docker.docker_compose_v2:
+        project_src: "{{ ansible_env.HOME }}/wazuh-docker/multi-node"
         files:
           - generate-indexer-certs.yml
-        build: false
-        pull: false
-        restarted: false
-        removed: false
-        state: present
-        services:
+        run_services:
           - generator
-        stopped: false
-        remove_orphans: false
-        recreate: never
-        run_once: true
         run_options:
           - --rm
 
     - name: Bring up Wazuh stack
-      community.docker.docker_compose:
-        project_src: "{{ ansible_env.HOME }}/wazuh-docker"
+      community.docker.docker_compose_v2:
+        project_src: "{{ ansible_env.HOME }}/wazuh-docker/multi-node"
         state: present
