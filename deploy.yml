@@ -71,10 +71,17 @@
         dest: "/home/ubuntu/wazuh-docker"
         version: v4.12.0
 
+    - name: Check if indexer certs exist
+      ansible.builtin.find:
+        paths: /home/ubuntu/wazuh-docker/multi-node/config/wazuh_indexer_ssl_certs/
+        file_type: file
+      register: certs_found
+    
     - name: Generate indexer certs with docker compose
       ansible.builtin.command: docker compose -f generate-indexer-certs.yml run --rm generator
       args:
         chdir: "/home/ubuntu/wazuh-docker/multi-node"
+        when: certs_found.matched == 0
 
     - name: Bring up Wazuh stack
       community.docker.docker_compose_v2:
