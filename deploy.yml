@@ -15,13 +15,22 @@
         path: /swapfile
         mode: '0600'
 
+    - name: Check if swapfile exists and is a block device
+      stat:
+        path: /swapfile
+      register: swapfile_stat
+
     - name: Format swapfile
       command: mkswap /swapfile
       when: swapfile_stat.stat.exists and not swapfile_stat.stat.isblk
 
+    - name: Check current swap devices
+      command: cat /proc/swaps
+      register: swapfile_swaps
+
     - name: Enable swapfile
       command: swapon /swapfile
-      when: "'/swapfile' not in ansible_swaptotal_mb.stdout"
+      when: "'/swapfile' not in swapfile_swaps.stdout"
 
     # Install Docker and Docker compose
     - name: Install required system packages
