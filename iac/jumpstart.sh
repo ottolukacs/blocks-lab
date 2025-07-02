@@ -17,4 +17,4 @@ ansible-galaxy collection install community.docker
 #Other
 mkdir /home/ubuntu/ansible
 cd /home/ubuntu/ansible
-wget https://raw.githubusercontent.com/ottolukacs/blocks-lab/refs/heads/main/deploy.yml
+wget https://raw.githubusercontent.com/ottolukacs/blocks-lab/refs/heads/main/cyberlab-deployer/deploy.yml
