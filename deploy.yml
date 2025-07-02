@@ -4,12 +4,26 @@
   become: yes
 
   tasks:
-    - name: Create and enable swapfile
-      community.general.swapfile:
-        path: /swapfile
-        size: 4096
-        state: present
+    # Deploy swap file if necessary
+    - name: Create swapfile
+      command: fallocate -l 4G /swapfile
+      args:
+        creates: /swapfile
 
+    - name: Set permissions on swapfile
+      file:
+        path: /swapfile
+        mode: '0600'
+
+    - name: Format swapfile
+      command: mkswap /swapfile
+      when: swapfile_stat.stat.exists and not swapfile_stat.stat.isblk
+
+    - name: Enable swapfile
+      command: swapon /swapfile
+      when: "'/swapfile' not in ansible_swaptotal_mb.stdout"
+
+    # Install Docker and Docker compose
     - name: Install required system packages
       apt:
         name:
@@ -41,6 +55,7 @@
         state: present
         update_cache: yes
 
+    # Deploy starting Wazuh stack
     - name: Clone specific version of wazuh-docker repo
       ansible.builtin.git:
         repo: https://github.com/wazuh/wazuh-docker.git
