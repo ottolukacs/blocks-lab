@@ -7,30 +7,17 @@
     # Deploy swap file if necessary
     - name: Create swapfile
       command: fallocate -l 4G /swapfile
-      args:
-        creates: /swapfile
 
     - name: Set permissions on swapfile
       file:
         path: /swapfile
         mode: '0600'
 
-    - name: Check if swapfile exists and is a block device
-      stat:
-        path: /swapfile
-      register: swapfile_stat
-
     - name: Format swapfile
       command: mkswap /swapfile
-      when: swapfile_stat.stat.exists and not swapfile_stat.stat.isblk
-
-    - name: Check current swap devices
-      command: cat /proc/swaps
-      register: swapfile_swaps
 
     - name: Enable swapfile
       command: swapon /swapfile
-      when: "'/swapfile' not in swapfile_swaps.stdout"
 
     # Install Docker and Docker compose
     - name: Install required system packages
@@ -71,17 +58,10 @@
         dest: "/home/ubuntu/wazuh-docker"
         version: v4.12.0
 
-    - name: Check if indexer certs exist
-      ansible.builtin.find:
-        paths: /home/ubuntu/wazuh-docker/multi-node/config/wazuh_indexer_ssl_certs/
-        file_type: file
-      register: certs_found
-    
     - name: Generate indexer certs with docker compose
       ansible.builtin.command: docker compose -f generate-indexer-certs.yml run --rm generator
       args:
         chdir: "/home/ubuntu/wazuh-docker/multi-node"
-        when: certs_found.matched == 0
 
     - name: Bring up Wazuh stack
       community.docker.docker_compose_v2:
