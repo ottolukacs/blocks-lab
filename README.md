@@ -1,16 +1,18 @@
-# 🛡️ Cybersecurity Lab Project
+# 🛡️ blocks-lab Project
 
 ## Project Purpose
 
 The goal of this project is to create a cybersecurity lab. In this lab, you can automatically deploy both a server and a victim host as VM instances. The objective is twofold:  
 - First, to provide a SIEM server packed with powerful monitoring and management tools, featuring lots of intuitive visualizations.  
-- Second, to ensure that this functional server can be deployed as automatically and quickly as possible on any platform.
+- Second, to ensure that this wide functional server can be deployed as automatically and quickly as possible on any platform.
 
 At project launch, the supported platform is Ubuntu on AWS, and the SIEM solution is the Wazuh stack.
 
 ---
 
 ## 📁 Directory Overview
+
+### `iac` directory
 
 The `iac` directory contains Infrastructure as Code files for Terraform:
 
@@ -22,9 +24,7 @@ The `iac` directory contains Infrastructure as Code files for Terraform:
 - **Keypair.tf** – Manages the SSH key pair for accessing your EC2 instances.
 - **jumpstart.sh** – A helper shell script to deploy Ansible for the next setup steps in the lab.
 
----
-
-## ⚙️ Wazuh Stack Setup
+### `cyberlab-deployer` directory
 
 The `cyberlab-deployer` directory is where the setup for Wazuh and all its dependencies and configurations happens, mainly using Ansible and Docker Compose.  
 *A detailed description is coming soon!*
