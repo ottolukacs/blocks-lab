@@ -6,7 +6,7 @@ all:
   vars:
     ansible_ssh_private_key_file: /home/ubuntu/.ssh/iac_key
     ansible_user: ubuntu
-    ossec_conf_url: "https://raw.githubusercontent.com/ottolukacs/blocks-lab/refs/heads/main/README.md"
+    ossec_conf_url: "https://raw.githubusercontent.com/ottolukacs/blocks-lab/refs/heads/main/cyberlab-deployer/customOssecForAgents.conf"
 
     wazuh_managers:
       - address: 172.31.16.10
