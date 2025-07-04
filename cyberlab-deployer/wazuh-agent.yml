@@ -4,11 +4,3 @@
   become: yes
   roles:
     - ansible-wazuh-agent
-  tasks:
-    - name: Download ossec.conf from specified URL
-      ansible.builtin.get_url:
-        url: "{{ ossec_conf_url }}"
-        dest: /var/ossec/etc/ossec.conf
-        mode: '0644'
-        owner: root
-        group: wazuh
