@@ -7,7 +7,7 @@ resource "aws_security_group" "wazuh_stack" {
     description = "Wazuh agent-to-manager (UDP 1514)"
     from_port   = 1514
     to_port     = 1514
-    protocol    = "udp"
+    protocol    = "tcp"
     cidr_blocks = ["172.31.16.0/20"]
   }
 

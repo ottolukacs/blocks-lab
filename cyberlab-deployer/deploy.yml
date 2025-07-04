@@ -68,7 +68,7 @@
         project_src: "/home/ubuntu/blocks-lab/wazuh-docker/single-node"
         state: present
 
-    - name: Clone specific version of wazuh-docker repo
+    - name: Clone specific version of wazuh-ansible repo
       ansible.builtin.git:
         repo: https://github.com/wazuh/wazuh-ansible.git
         dest: "/etc/ansible/roles/wazuh-ansible"
