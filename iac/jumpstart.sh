@@ -11,10 +11,5 @@ apt install software-properties-common -y
 add-apt-repository --yes --update ppa:ansible/ansible
 apt install ansible -y
 
-# Install Ansible collections
-ansible-galaxy collection install community.docker
-
 #Other
-mkdir /home/ubuntu/ansible
-cd /home/ubuntu/ansible
-wget https://raw.githubusercontent.com/ottolukacs/blocks-lab/refs/heads/main/cyberlab-deployer/deploy.yml
+git clone https://github.com/ottolukacs/blocks-lab.git /home/ubuntu/blocks-lab

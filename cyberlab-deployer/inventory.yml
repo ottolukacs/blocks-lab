@@ -1,0 +1,20 @@
+all:
+  hosts:
+    sandbox-1:
+      ansible_host: 172.31.16.11
+  
+  vars:
+    ansible_ssh_private_key_file: /home/ubuntu/.ssh/iac_key
+    ansible_user: ubuntu
+    ossec_conf_url: "https://raw.githubusercontent.com/ottolukacs/blocks-lab/refs/heads/main/README.md"
+
+    wazuh_managers:
+      - address: 172.31.16.10
+        port: 1514
+        protocol: udp
+    wazuh_agent_authd:
+      registration_address: 172.31.16.10
+      enable: true
+      port: 1515
+      ssl_agent_ca: null
+      ssl_auto_negotiate: 'no'

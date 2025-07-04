@@ -1,10 +1,13 @@
 resource "aws_instance" "blocks-srv" {
-  ami                    = var.amiID[var.region]
-  instance_type          = "t2.medium"
-  key_name               = "blocks-key"
-  vpc_security_group_ids = [aws_security_group.blocks-sg.id]
-  availability_zone      = var.zone
-  private_ip             = "172.31.16.10"
+  ami           = var.amiID[var.region]
+  instance_type = "t2.medium"
+  key_name      = "blocks-key"
+  vpc_security_group_ids = [
+    aws_security_group.blocks-sg.id,
+    aws_security_group.wazuh_stack.id
+  ]
+  availability_zone = var.zone
+  private_ip        = "172.31.16.10"
 
   tags = {
     Name    = "blocks-srv"
@@ -12,7 +15,7 @@ resource "aws_instance" "blocks-srv" {
   }
 
   root_block_device {
-    volume_size = 20
+    volume_size = 60
     volume_type = "gp3"
   }
 

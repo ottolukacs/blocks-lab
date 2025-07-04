@@ -55,15 +55,27 @@
     - name: Clone specific version of wazuh-docker repo
       ansible.builtin.git:
         repo: https://github.com/wazuh/wazuh-docker.git
-        dest: "/home/ubuntu/wazuh-docker"
+        dest: "/home/ubuntu/blocks-lab/wazuh-docker"
         version: v4.12.0
 
     - name: Generate indexer certs with docker compose
       ansible.builtin.command: docker compose -f generate-indexer-certs.yml run --rm generator
       args:
-        chdir: "/home/ubuntu/wazuh-docker/multi-node"
+        chdir: "/home/ubuntu/blocks-lab/wazuh-docker/single-node"
 
     - name: Bring up Wazuh stack
       community.docker.docker_compose_v2:
-        project_src: "/home/ubuntu/wazuh-docker/multi-node"
+        project_src: "/home/ubuntu/blocks-lab/wazuh-docker/single-node"
         state: present
+
+    - name: Clone specific version of wazuh-docker repo
+      ansible.builtin.git:
+        repo: https://github.com/wazuh/wazuh-ansible.git
+        dest: "/etc/ansible/roles/wazuh-ansible"
+        version: v4.12.0
+
+    - name: Ensure symlink exists for wazuh role
+      ansible.builtin.file:
+        src: /etc/ansible/roles/wazuh-ansible/roles/wazuh/ansible-wazuh-agent
+        dest: /etc/ansible/roles/ansible-wazuh-agent
+        state: link
