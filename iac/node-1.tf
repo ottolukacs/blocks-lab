@@ -1,4 +1,4 @@
-resource "aws_instance" "sandbox-1" {
+resource "aws_instance" "node-1" {
   ami           = var.amiID[var.region]
   instance_type = "t2.micro"
   key_name      = "blocks-key"
@@ -10,11 +10,11 @@ resource "aws_instance" "sandbox-1" {
   private_ip        = "172.31.16.11"
 
   tags = {
-    Name    = "sandbox-1"
+    Name    = "node-1"
     Project = "blocks-lab"
   }
 }
 
 output "victim-public-ip" {
-  value = aws_instance.sandbox-1.public_ip
+  value = aws_instance.node-1.public_ip
 }
