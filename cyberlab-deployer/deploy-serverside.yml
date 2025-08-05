@@ -3,7 +3,7 @@
   hosts: localhost
   become: yes
 
-  tasks:
+  pre_tasks:
     # Deploy swap file if necessary
     - name: Create swapfile
       command: fallocate -l 4G /swapfile

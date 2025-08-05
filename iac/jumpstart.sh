@@ -13,4 +13,4 @@ apt install ansible -y
 
 # Lab files
 git clone https://github.com/ottolukacs/blocks-lab.git /home/ubuntu/blocks-lab
-cp -r /home/ubuntu/blocks-lab/cyberlab-developer/roles/blocks-server /etc/ansible/roles/blocks-server
+cp -r /home/ubuntu/blocks-lab/cyberlab-deployer/roles/blocks-server /etc/ansible/roles/blocks-server
