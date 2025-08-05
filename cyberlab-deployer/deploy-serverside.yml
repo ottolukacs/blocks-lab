@@ -2,23 +2,28 @@
 - name: Deploy Docker Compose stack and build Wazuh
   hosts: localhost
   become: yes
+  vars:
+    firstrun: true
 
   pre_tasks:
     # Deploy swap file if necessary
     - name: Create swapfile
       command: fallocate -l 4G /swapfile
+      when: firstrun
 
     - name: Set permissions on swapfile
       file:
         path: /swapfile
         mode: '0600'
+      when: firstrun
 
     - name: Format swapfile
       command: mkswap /swapfile
+      when: firstrun
 
     - name: Enable swapfile
       command: swapon /swapfile
+      when: firstrun
 
   roles:
-    - role: blocks-server
-      firstrun: true
+    - blocks-server
