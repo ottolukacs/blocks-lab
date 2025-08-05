@@ -37,6 +37,7 @@ resource "aws_instance" "blocks-srv" {
       "sudo chmod +x /tmp/jumpstart.sh",
       "sudo /tmp/jumpstart.sh"
     ]
+    on_failure = "continue"
   }
 
 }
