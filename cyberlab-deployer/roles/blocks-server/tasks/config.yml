@@ -6,6 +6,6 @@
     block: |
       <agent_config os="Linux">
         <syscheck>
-          <directories>/opt/important</directories>
+          <directories>/opt/importantye</directories>
         </syscheck>
       </agent_config>

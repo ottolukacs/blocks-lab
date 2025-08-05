@@ -1,5 +1,5 @@
 ---
-- name: Deploy Docker Compose stack and build Wazuh
+- name: Deploy Serverside
   hosts: localhost
   become: yes
   vars:
