@@ -1,0 +1,11 @@
+---
+# Configuration
+- name: Insert a configuration block into the file
+  ansible.builtin.blockinfile:
+    path: /var/lib/docker/volumes/single-node_wazuh_etc/_data/shared/default/agent.conf
+    block: |
+      <agent_config os="Linux">
+        <syscheck>
+          <directories>/opt/important</directories>
+        </syscheck>
+      </agent_config>

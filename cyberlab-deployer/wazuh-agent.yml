@@ -1,6 +1,0 @@
----
-- name: Deploy Wazuh agent on hosts
-  hosts: all
-  become: yes
-  roles:
-    - ansible-wazuh-agent

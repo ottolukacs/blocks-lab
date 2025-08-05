@@ -11,5 +11,6 @@ apt install software-properties-common -y
 add-apt-repository --yes --update ppa:ansible/ansible
 apt install ansible -y
 
-#Other
+# Lab files
 git clone https://github.com/ottolukacs/blocks-lab.git /home/ubuntu/blocks-lab
+cp -r /home/ubuntu/blocks-lab/cyberlab-developer/roles/blocks-server /etc/ansible/roles/blocks-server

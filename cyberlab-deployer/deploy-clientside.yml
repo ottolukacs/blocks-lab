@@ -1,0 +1,20 @@
+---
+- name: Deploy Wazuh agent on hosts
+  hosts: all
+  become: yes
+  
+  tasks:
+  - name: Clone specific version of wazuh-ansible repo
+  ansible.builtin.git:
+    repo: https://github.com/wazuh/wazuh-ansible.git
+    dest: "/etc/ansible/roles/wazuh-ansible"
+    version: v4.12.0
+
+- name: Ensure symlink exists for wazuh role
+  ansible.builtin.file:
+    src: /etc/ansible/roles/wazuh-ansible/roles/wazuh/ansible-wazuh-agent
+    dest: /etc/ansible/roles/ansible-wazuh-agent
+    state: link
+  
+  roles:
+    - ansible-wazuh-agent
