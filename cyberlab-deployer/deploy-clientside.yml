@@ -3,7 +3,7 @@
   hosts: all
   become: yes
   
-  tasks:
+  pre_tasks:
     - name: Install required system packages
       apt:
         name:
