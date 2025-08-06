@@ -4,8 +4,12 @@
   ansible.builtin.blockinfile:
     path: /var/lib/docker/volumes/single-node_wazuh_etc/_data/shared/default/agent.conf
     block: |
-      <agent_config os="Linux">
+      {% for integrity_check in integrity_checks %}
+      <agent_config name="{{ integrity_check.agent }}">
         <syscheck>
-          <directories>/opt/importantye</directories>
+          {% for dir in integrity_check.directories %}
+          <directories whodata="yes">{{ dir }}</directories>
+          {% endfor %}
         </syscheck>
       </agent_config>
+      {% endfor %}

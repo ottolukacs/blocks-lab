@@ -1,0 +1,11 @@
+all:
+  vars:
+    wazuh_version: "v4.12.0"
+
+    integrity_checks:
+      - agent: "*"
+        directories:
+          - /opt/importantye
+      - agent: node-1
+        directories:
+          - /opt/csakra

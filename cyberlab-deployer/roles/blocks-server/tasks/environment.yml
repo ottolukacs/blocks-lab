@@ -36,7 +36,7 @@
   ansible.builtin.git:
     repo: https://github.com/wazuh/wazuh-docker.git
     dest: "/home/ubuntu/blocks-lab/wazuh-docker"
-    version: v4.12.0
+    version: "{{ wazuh_version }}"
 
 - name: Generate indexer certs with docker compose
   ansible.builtin.command: docker compose -f generate-indexer-certs.yml run --rm generator
