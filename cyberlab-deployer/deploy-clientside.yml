@@ -4,20 +4,6 @@
   become: yes
   
   pre_tasks:
-    - name: Clone specific version of wazuh-ansible repo
-      ansible.builtin.git:
-        repo: https://github.com/wazuh/wazuh-ansible.git
-        dest: "/home/ubuntu/blocks-lab/wazuh-ansible"
-        version: "{{ wazuh_version }}"
-      delegate_to: localhost
-
-    - name: Ensure symlink exists for wazuh role
-      ansible.builtin.file:
-        src: /home/ubuntu/blocks-lab/wazuh-ansible/roles/wazuh/ansible-wazuh-agent
-        dest: /etc/ansible/roles/ansible-wazuh-agent
-        state: link
-      delegate_to: localhost
-
     - name: Set hostname
       ansible.builtin.hostname:
         name: "{{ inventory_hostname }}"
