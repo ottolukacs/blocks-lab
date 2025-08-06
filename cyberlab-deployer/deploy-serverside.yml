@@ -4,27 +4,28 @@
   become: yes
   vars_prompt:
     - name: "firstrun"
-      prompt: "First run? (true/false)"
+      prompt: "First run? (yes/no)"
+      private: no
 
   pre_tasks:
     # Deploy swap file if necessary
     - name: Create swapfile
       command: fallocate -l 4G /swapfile
-      when: firstrun
+      when: firstrun == "yes"
 
     - name: Set permissions on swapfile
       file:
         path: /swapfile
         mode: '0600'
-      when: firstrun
+      when: firstrun == "yes"
 
     - name: Format swapfile
       command: mkswap /swapfile
-      when: firstrun
+      when: firstrun == "yes"
 
     - name: Enable swapfile
       command: swapon /swapfile
-      when: firstrun
+      when: firstrun == "yes"
 
   roles:
     - blocks-server

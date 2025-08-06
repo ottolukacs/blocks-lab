@@ -42,7 +42,7 @@
   ansible.builtin.command: docker compose -f generate-indexer-certs.yml run --rm generator
   args:
     chdir: "/home/ubuntu/blocks-lab/wazuh-docker/single-node"
-  when: firstrun
+  when: firstrun == "yes"
 
 - name: Bring up Wazuh stack
   community.docker.docker_compose_v2:
