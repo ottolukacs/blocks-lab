@@ -5,7 +5,7 @@
     path: /var/lib/docker/volumes/single-node_wazuh_etc/_data/shared/default/agent.conf
     block: |
       {% for integrity_check in integrity_checks %}
-      <agent_config name="{{ integrity_check.agent }}">
+      <agent_config{% if integrity_check.agent != "all" %} name="{{ integrity_check.agent }}"{% endif %}>
         <syscheck>
           {% for dir in integrity_check.directories %}
           <directories whodata="yes">{{ dir }}</directories>
