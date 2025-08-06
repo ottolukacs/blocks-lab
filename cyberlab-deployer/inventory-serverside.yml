@@ -3,7 +3,7 @@ all:
     wazuh_version: "v4.12.0"
 
     integrity_checks:
-      - agent: "*"
+      - agent: all
         directories:
           - /opt/importantye
       - agent: node-1
