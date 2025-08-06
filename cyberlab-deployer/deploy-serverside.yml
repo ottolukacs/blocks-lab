@@ -2,8 +2,9 @@
 - name: Deploy Serverside
   hosts: localhost
   become: yes
-  vars:
-    firstrun: true
+  vars_prompt:
+    - name: "firstrun"
+      prompt: "First run? (true/false)"
 
   pre_tasks:
     # Deploy swap file if necessary
