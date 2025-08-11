@@ -1,6 +1,6 @@
 resource "aws_instance" "blocks-srv" {
   ami           = var.amiID[var.region]
-  instance_type = "t2.medium"
+  instance_type = "t3.small"
   key_name      = "blocks-key"
   vpc_security_group_ids = [
     aws_security_group.blocks-sg.id,
@@ -15,7 +15,7 @@ resource "aws_instance" "blocks-srv" {
   }
 
   root_block_device {
-    volume_size = 60
+    volume_size = 40
     volume_type = "gp3"
   }
 
