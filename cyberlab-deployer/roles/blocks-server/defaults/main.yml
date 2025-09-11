@@ -1,6 +1,12 @@
+# Environment
 wazuh_version: "v4.12.0"
 
+# Config
 integrity_checks:
   - agent: all
     directories:
       - /opt/
+
+# Assets
+initial_user: "admin"
+initial_pass: "SecretPassword"

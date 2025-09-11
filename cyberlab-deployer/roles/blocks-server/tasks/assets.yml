@@ -1,0 +1,13 @@
+---
+# Assets
+- name: Import Kibana visualization
+  ansible.builtin.uri:
+    url: "http://localhost:5601/api/saved_objects/_import"
+    method: POST
+    headers:
+      kbn-xsrf: "true"
+      Authorization: "Basic {{ (initial_user ~ ':' ~ initial_pass) | b64encode }}"
+    body_format: form-multipart
+    body:
+      file: "{{ lookup('file', role_path + '/assets/visualization.ndjson') }}"
+    status_code: 200
