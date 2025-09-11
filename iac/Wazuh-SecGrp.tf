@@ -1,6 +1,7 @@
 resource "aws_security_group" "wazuh_stack" {
   name        = "wazuh-stack-sg"
   description = "Security group for Wazuh stack (server and agent communication)"
+  vpc_id = "vpc-016a89a57f8ab3087"
 
   # Required ports
   ingress {
@@ -8,7 +9,7 @@ resource "aws_security_group" "wazuh_stack" {
     from_port   = 1514
     to_port     = 1514
     protocol    = "tcp"
-    cidr_blocks = ["172.31.16.0/20"]
+    cidr_blocks = ["172.31.80.0/20"]
   }
 
   ingress {
@@ -16,7 +17,7 @@ resource "aws_security_group" "wazuh_stack" {
     from_port   = 1515
     to_port     = 1515
     protocol    = "tcp"
-    cidr_blocks = ["172.31.16.0/20"]
+    cidr_blocks = ["172.31.80.0/20"]
   }
 
   ingress {
@@ -24,7 +25,7 @@ resource "aws_security_group" "wazuh_stack" {
     from_port   = 55000
     to_port     = 55000
     protocol    = "tcp"
-    cidr_blocks = ["172.31.16.0/20"]
+    cidr_blocks = ["172.31.80.0/20"]
   }
 
   # Optional ports
@@ -33,7 +34,7 @@ resource "aws_security_group" "wazuh_stack" {
     from_port   = 514
     to_port     = 514
     protocol    = "tcp"
-    cidr_blocks = ["172.31.16.0/20"]
+    cidr_blocks = ["172.31.80.0/20"]
   }
 
   ingress {
@@ -41,7 +42,7 @@ resource "aws_security_group" "wazuh_stack" {
     from_port   = 514
     to_port     = 514
     protocol    = "udp"
-    cidr_blocks = ["172.31.16.0/20"]
+    cidr_blocks = ["172.31.80.0/20"]
   }
 
   ingress {
@@ -49,7 +50,7 @@ resource "aws_security_group" "wazuh_stack" {
     from_port   = 5601
     to_port     = 5601
     protocol    = "tcp"
-    cidr_blocks = ["172.31.16.0/20"]
+    cidr_blocks = ["172.31.80.0/20"]
   }
 
   ingress {
@@ -57,7 +58,7 @@ resource "aws_security_group" "wazuh_stack" {
     from_port   = 9200
     to_port     = 9200
     protocol    = "tcp"
-    cidr_blocks = ["172.31.16.0/20"]
+    cidr_blocks = ["172.31.80.0/20"]
   }
 
   # Allow all outbound traffic (modify if you want to restrict)

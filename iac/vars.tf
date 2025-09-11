@@ -3,7 +3,7 @@ variable "region" {
 }
 
 variable "zone" {
-  default = "eu-central-1a"
+  default = "eu-central-1c"
 }
 
 variable "amiID" {

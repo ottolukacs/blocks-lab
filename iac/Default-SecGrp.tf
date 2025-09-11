@@ -1,6 +1,7 @@
 resource "aws_security_group" "blocks-sg" {
   name        = "blocks-sg"
   description = "blocks-sg"
+  vpc_id = "vpc-016a89a57f8ab3087"
 
   tags = {
     Name = "blocks-sg"

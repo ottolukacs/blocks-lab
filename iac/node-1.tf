@@ -7,7 +7,8 @@ resource "aws_instance" "node-1" {
     aws_security_group.wazuh_stack.id
   ]
   availability_zone = var.zone
-  private_ip        = "172.31.16.11"
+  private_ip        = "172.31.80.11"
+  subnet_id = "subnet-0d312da63588f1958"
 
   tags = {
     Name    = "node-1"
