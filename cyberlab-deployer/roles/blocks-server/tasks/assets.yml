@@ -1,18 +1,20 @@
 ---
 # Assets
-- name: Várakozás a Dashboard API-ra
+- name: Waiting for Dashboard API
   ansible.builtin.uri:
-    url: "https://localhost:443/api/status"
+    url: "https://localhost/api/status"
     method: GET
+    headers:
+      Authorization: "Basic {{ (initial_user ~ ':' ~ initial_pass) | b64encode }}"
     validate_certs: false
   register: kib_status
   retries: 20
   delay: 6
   until: kib_status.status == 200
 
-- name: Kibana (Wazuh dashboard) vizualizáció import
+- name: Import Dashboard Assets 1
   ansible.builtin.uri:
-    url: "https://localhost:443/api/saved_objects/_import"
+    url: "https://localhost/api/saved_objects/_import"
     method: POST
     headers:
       osd-xsrf: "true"
@@ -21,7 +23,6 @@
     body:
       file:
         filename: "visualization.ndjson"
-        mime_type: "application/ndjson"
         content: "{{ lookup('file', role_path + '/assets/visualization.ndjson') }}"
     status_code: 200
     validate_certs: false
