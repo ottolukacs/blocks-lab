@@ -9,7 +9,7 @@
     validate_certs: false
   register: kib_status
   retries: 20
-  delay: 6
+  delay: 20
   until: kib_status.status == 200
 
 - name: Import Dashboard Assets 1
