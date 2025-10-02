@@ -16,7 +16,7 @@
 - name: Import Dashboard Assets 1
   when: inventory_hostname == "wazuh-dashboard"
   ansible.builtin.uri:
-    url: "https://localhost/api/saved_objects/_import"
+    url: "https://localhost/api/saved_objects/_import?overwrite=true"
     method: POST
     headers:
       osd-xsrf: "true"

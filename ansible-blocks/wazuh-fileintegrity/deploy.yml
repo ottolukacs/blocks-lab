@@ -1,14 +1,7 @@
 ---
 - name: Deploy Serverside
-  hosts: localhost
+  hosts: all
   become: yes
 
-  pre_tasks:
-    - name: Ensure symlink exists for blocks role
-      ansible.builtin.file:
-        src: "{{ playbook_dir }}/role"
-        dest: /etc/ansible/roles/wazuh-fileintegrity
-        state: link
-
   roles:
-    - wazuh-fileintegrity
+    - deploy-fi-inspection
