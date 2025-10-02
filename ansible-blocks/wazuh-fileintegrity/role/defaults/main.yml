@@ -1,0 +1,9 @@
+# Config
+integrity_checks:
+  - agent: all
+    directories:
+      - /opt/valami
+
+# Assets
+initial_user: "admin"
+initial_pass: "SecretPassword"

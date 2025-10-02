@@ -1,0 +1,17 @@
+---
+# Configuration
+- name: Insert a configuration block into the file
+  when: inventory_hostname == "wazuh-manager"
+  ansible.builtin.blockinfile:
+    path: /var/ossec/etc/shared/default/agent.conf
+    marker: "# {mark} ANSIBLE MANAGED BLOCK – Blocks-lab: wazuh-fileintegrity"
+    block: |
+      {% for integrity_check in integrity_checks %}
+      <agent_config{% if integrity_check.agent != "all" %} name="{{ integrity_check.agent }}"{% endif %}>
+        <syscheck>
+          {% for dir in integrity_check.directories %}
+          <directories whodata="yes">{{ dir }}</directories>
+          {% endfor %}
+        </syscheck>
+      </agent_config>
+      {% endfor %}
