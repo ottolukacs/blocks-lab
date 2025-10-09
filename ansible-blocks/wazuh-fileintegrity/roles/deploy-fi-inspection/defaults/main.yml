@@ -1,9 +1,9 @@
-# Config
+# For manager container or host
 integrity_checks:
   - agent: all
     directories:
       - /opt/valami
 
-# Assets
+# For dashboard container or host
 initial_user: "admin"
 initial_pass: "SecretPassword"

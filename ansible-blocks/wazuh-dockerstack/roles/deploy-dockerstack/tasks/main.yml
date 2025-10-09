@@ -1,0 +1,10 @@
+- name: Deploy Docker compose on Debian based OS
+  import_tasks: docker_debian.yml
+  when: ansible_os_family == "Debian"
+
+- name: Deploy Docker compose on RedHat based OS
+  import_tasks: docker_rhel.yml
+  when: ansible_os_family == "RedHat"
+
+- name: Bring up Wazuh Stack
+  import_tasks: bringup.yml

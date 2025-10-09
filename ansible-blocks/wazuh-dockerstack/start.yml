@@ -1,0 +1,7 @@
+---
+- name: Setup file integrity inspection for Wazuh
+  hosts: all
+  become: yes
+
+  roles:
+    - deploy-dockerstack

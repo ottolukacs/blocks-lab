@@ -25,6 +25,6 @@
     body:
       file:
         filename: "visualization.ndjson"
-        content: "{{ lookup('file', role_path + '/assets/visualization.ndjson') }}"
+        content: "{{ lookup('file', role_path + '/files/visualization.ndjson') }}"
     status_code: 200
     validate_certs: false

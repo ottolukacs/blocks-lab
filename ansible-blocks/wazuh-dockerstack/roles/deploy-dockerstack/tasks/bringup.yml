@@ -1,0 +1,17 @@
+# Bring up Wazuh stack
+- name: Clone specific version of wazuh-docker repo
+  ansible.builtin.git:
+    repo: https://github.com/wazuh/wazuh-docker.git
+    dest: "/home/ubuntu/blocks-lab/wazuh-docker"
+    version: "{{ wazuh_version }}"
+
+- name: Generate indexer certs with docker compose
+  ansible.builtin.command: docker compose -f generate-indexer-certs.yml run --rm generator
+  args:
+    chdir: "/home/ubuntu/blocks-lab/wazuh-docker/single-node"
+  when: firstrun == "yes"
+
+- name: Bring up Wazuh stack
+  community.docker.docker_compose_v2:
+    project_src: "/home/ubuntu/blocks-lab/wazuh-docker/single-node"
+    state: present
