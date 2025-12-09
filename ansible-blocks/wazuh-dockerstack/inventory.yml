@@ -3,5 +3,5 @@ all:
     wazuh-server-1:
       ansible_connection: local
       ansible_host: localhost
-      wazuh_version: "v4.12.0"
+      wazuh_version: "v4.14.1"
       firstrun: "yes"

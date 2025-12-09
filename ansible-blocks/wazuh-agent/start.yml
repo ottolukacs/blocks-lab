@@ -1,5 +1,5 @@
 ---
-- name: Setup file integrity inspection for Wazuh
+- name: Install Wazuh Agent
   hosts: all
   become: yes
 
@@ -16,8 +16,8 @@
 
   - name: Ensure symlink exists for wazuh role
     ansible.builtin.file:
-      src: /home/ubuntu/blocks-lab/wazuh-ansible/roles/wazuh/ansible-wazuh-agent
-      dest: /etc/ansible/roles/ansible-wazuh-agent
+      src: /home/ubuntu/blocks-lab/wazuh-ansible/roles/wazuh/wazuh-agent
+      dest: /etc/ansible/roles/wazuh-agent
       state: link
     delegate_to: localhost
     run_once: true
@@ -36,4 +36,4 @@
     
   # Install Wazuh agent
   roles:
-    - ansible-wazuh-agent
+    - wazuh-agent
