@@ -1,0 +1,20 @@
+all:
+  hosts:
+    node-1:
+      ansible_host: 172.31.80.11
+  
+  vars:
+    ansible_ssh_private_key_file: /home/ubuntu/.ssh/iac_key
+    ansible_user: ubuntu
+    wazuh_version: "v4.12.0"
+
+    wazuh_managers:
+      - address: 172.31.80.10
+        port: 1514
+        protocol: tcp
+    wazuh_agent_authd:
+      registration_address: 172.31.80.10
+      enable: true
+      port: 1515
+      ssl_agent_ca: null
+      ssl_auto_negotiate: 'no'

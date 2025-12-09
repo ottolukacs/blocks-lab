@@ -15,5 +15,5 @@ apt install ansible -y
 git clone https://github.com/ottolukacs/blocks-lab.git /home/ubuntu/blocks-lab
 
 # Copy roles to ansible
-cp -r /home/ubuntu/blocks-lab/cyberlab-deployer/roles/blocks-server /etc/ansible/roles/blocks-server
+# cp -r /home/ubuntu/blocks-lab/cyberlab-deployer/roles/blocks-server /etc/ansible/roles/blocks-server
 

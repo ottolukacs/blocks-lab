@@ -1,0 +1,35 @@
+---
+- name: Setup file integrity inspection for Wazuh
+  hosts: all
+  become: yes
+
+  pre_tasks:
+
+  # Install Wazuh-ansible
+  - name: Clone specific version of wazuh-ansible repo
+    ansible.builtin.git:
+      repo: https://github.com/wazuh/wazuh-ansible.git
+      dest: "/home/ubuntu/blocks-lab/wazuh-ansible"
+      version: "{{ wazuh_version }}"
+
+  - name: Ensure symlink exists for wazuh role
+    ansible.builtin.file:
+      src: /home/ubuntu/blocks-lab/wazuh-ansible/roles/wazuh/ansible-wazuh-agent
+      dest: /etc/ansible/roles/ansible-wazuh-agent
+      state: link
+
+  # Pre-requirements
+  - name: Set hostname
+    ansible.builtin.hostname:
+      name: "{{ inventory_hostname }}"
+
+  - name: Install required system packages
+    apt:
+      name:
+        - auditd
+      state: present
+      update_cache: yes
+    
+  # Install Wazuh agent
+  roles:
+    - ansible-wazuh-agent
