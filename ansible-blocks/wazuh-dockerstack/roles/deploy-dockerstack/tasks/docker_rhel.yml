@@ -1,0 +1,3 @@
+- name: Csak egy üzenet kiírása
+  ansible.builtin.debug:
+    msg: "Hello, ez egy teszt üzenet futás közben."

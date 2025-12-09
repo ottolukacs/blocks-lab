@@ -2,6 +2,26 @@
 - name: Setup file integrity inspection for Wazuh
   hosts: all
   become: yes
+  
+  pre_tasks:
+    # Deploy swap file if necessary
+    - name: Create swapfile
+      command: fallocate -l 4G /swapfile
+      when: firstrun == "yes"
+
+    - name: Set permissions on swapfile
+      file:
+        path: /swapfile
+        mode: '0600'
+      when: firstrun == "yes"
+
+    - name: Format swapfile
+      command: mkswap /swapfile
+      when: firstrun == "yes"
+
+    - name: Enable swapfile
+      command: swapon /swapfile
+      when: firstrun == "yes"
 
   roles:
     - deploy-dockerstack
