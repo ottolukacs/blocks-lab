@@ -3,20 +3,19 @@
   hosts: all
   become: yes
 
-  pre_tasks:
+  tasks:
 
-  # Install Wazuh-ansible
-  - name: Clone specific version of wazuh-ansible repo
+  # Install Wazuh-ansible roles
+  - name: Clone specific version of wazuh-ansible repo on controller
     ansible.builtin.git:
       repo: https://github.com/wazuh/wazuh-ansible.git
       dest: "/home/ubuntu/blocks-lab/wazuh-ansible"
-      version: "{{ wazuh_version }}"
     delegate_to: localhost
     run_once: true
 
-  - name: Ensure symlink exists for wazuh role
+  - name: Ensure symlink exists for wazuh role on controller
     ansible.builtin.file:
-      src: /home/ubuntu/blocks-lab/wazuh-ansible/roles/wazuh/wazuh-agent
+      src: /home/ubuntu/blocks-lab/wazuh-ansible/roles/wazuh-agent
       dest: /etc/ansible/roles/wazuh-agent
       state: link
     delegate_to: localhost
@@ -34,6 +33,6 @@
       state: present
       update_cache: yes
     
-  # Install Wazuh agent
-  roles:
-    - wazuh-agent
+  - name: Run Wazuh agent role
+    ansible.builtin.include_role:
+      name: wazuh-agent

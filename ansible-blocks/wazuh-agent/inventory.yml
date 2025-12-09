@@ -6,7 +6,6 @@ all:
   vars:
     ansible_ssh_private_key_file: /home/ubuntu/.ssh/iac_key
     ansible_user: ubuntu
-    wazuh_version: "v4.14.1"
 
     wazuh_managers:
       - address: 172.31.80.10
