@@ -10,7 +10,7 @@ all:
     wazuh_managers:
       - address: 172.31.80.10
         port: 1514
-        protocol: udp
+        protocol: tcp
     wazuh_agent_authd:
       registration_address: 172.31.80.10
       enable: true
