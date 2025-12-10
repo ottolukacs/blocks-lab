@@ -10,9 +10,10 @@ all:
     wazuh_managers:
       - address: 172.31.80.10
         port: 1514
-        protocol: tcp
-        api_port: 55000
-        api_proto: 'https'
-        api_user: wazuh
-        max_retries: 5
-        retry_interval: 5
+        protocol: udp
+    wazuh_agent_authd:
+      registration_address: 172.31.80.10
+      enable: true
+      port: 1515
+      ssl_agent_ca: null
+      ssl_auto_negotiate: 'no'
