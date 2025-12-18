@@ -9,7 +9,8 @@
   - name: Clone specific version of wazuh-ansible repo on controller
     ansible.builtin.git:
       repo: https://github.com/wazuh/wazuh-ansible.git
-      dest: "/etc/ansible/roles/"
+      dest: "/etc/ansible/roles/wazuh-ansible/"
+      version: "{{ wazuh_version }}"
     delegate_to: localhost
     run_once: true
 
