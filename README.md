@@ -1,3 +1,5 @@
+<img src="assets/logo.png" width="150">
+
 # 🛡️ blocks-lab Project
 
 ## Project Purpose
