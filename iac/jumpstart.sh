@@ -12,7 +12,7 @@ add-apt-repository --yes --update ppa:ansible/ansible
 apt install ansible -y
 
 # Clone necessary Git Repos
-git clone https://github.com/ottolukacs/blocks-lab.git /home/ubuntu/blocks-lab
+git clone https://github.com/ottolukacs/Siemcrafter.git /home/ubuntu/siemcrafter
 
 # Copy roles to ansible
 # cp -r /home/ubuntu/blocks-lab/cyberlab-deployer/roles/blocks-server /etc/ansible/roles/blocks-server

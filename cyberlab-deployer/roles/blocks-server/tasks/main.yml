@@ -1,8 +1,0 @@
-- name: Deploy environment
-  import_tasks: environment.yml
-
-- name: Configuration management
-  import_tasks: config.yml
-
-- name: Setup assets
-  import_tasks: assets.yml

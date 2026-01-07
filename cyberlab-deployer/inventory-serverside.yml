@@ -1,9 +1,0 @@
-all:
-  vars:
-    integrity_checks:
-      - agent: all
-        directories:
-          - /opt/importantye
-      - agent: node-1
-        directories:
-          - /opt/csakra
